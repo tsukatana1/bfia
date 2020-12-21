@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.enter-info {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right, #e88223, #ebab0c);
+    flex-direction: column;
+}
+
+.donating-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    width: 50%;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+}
+
+.donating-form p {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+}
+
+.btn-markup {
+    color: blue;
+    font-weight: bold;
+}
+
+label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+input {
+    outline: none;
+    border: 1px solid grey;
+    height: 25px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.child-divs {
+    display: flex;
+    flex-direction: column;
+}
+
+.each-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+}
+
+.gen-sep {
+    margin-top: 10px;
+}
+
+.each-child input {
+    margin-bottom: 10px;
+}
+
+.age-and-info input {
+    margin-left: 0;
+    width: 200px;
+}
+
+.gender-select {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.gender-select label {
+    margin-left: 20px;
+}
+
+.gender-select input {
+    float: left;
+    margin-right: 10px;
+}
+
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-10%); }
+    50% { transform: translateY(-20%); }
+    75% { transform: translateY(-10%); }
+    100% { transform: translateY(0);}
+}
+
+@media screen and (max-width: 760px) {
+    .donating-form {
+        width: 100%;
+    }
+}

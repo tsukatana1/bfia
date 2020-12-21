@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<title>Payment Failure</title>
+<body>
+    <link href="/css/failure.css" rel="stylesheet" type="text/css">
+    <div class="error-box">
+        <h1>An error occured processing your payment and it has been canceled.</h1>
+        <h2>If you manually closed the payment window, do not worry about this window.</h2>
+        <p>You will be redirected to the home page in <span id="timer">10</span> seconds.</p>
+    </div>
+    <script type="text/javascript">
+    const timeCount = document.getElementById('timer')
+    setTimeout(e => {
+        window.location = 'http://localhost:3000/home'
+    }, 10000)
+    </script>
+</body>

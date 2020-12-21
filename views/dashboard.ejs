@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    </head>
+    <title>Profile Dashboard</title>
+    <link href="/css/dashboard.css" rel="stylesheet" type="text/css">
+    <body>
+        <div id="hamburger"></div>
+        <nav class="navbr">
+            <div class="logo">
+                <img src="/css/images/image1.png" alt="Lol">
+                <p>BFIA Profile Dashboard</p>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li><button id="profile" data-text="Profile" href="#"><span id="lol" class="iconify" data-icon="carbon:user-profile" data-inline="false"></span></button></li>
+                    <li><button id="breh" data-text="Transactions" href="#"><span class="iconify" data-icon="fa-solid:money-bill-wave" data-inline="false"></span></button></li>
+                    <li><button id="reports" data-text="Reports"><span class="iconify" data-icon="carbon:report" data-inline="false"></span></button></li>
+                </ul>
+            </div>
+            <div class="close-menu">
+                <button id="close-nav" data-text="Close Menu"><span class="iconify" data-icon="ic:round-close-fullscreen" data-inline="false"></span></button>
+            </div>
+        </nav>
+        <div class="main-body">
+            <div class="profile-info">
+                <h2> Welcome <%= result[0]['username'] %> </h2>
+                <span id="user-id"> UUID: <%= result[0]['user_id'] %> </span>
+                <br>
+                <span id="edit-accmarker">Want to edit your account? You can by completing the form below:</span>
+                <br>
+                <br>
+                <% if(err !== null) { %>
+                    <% if(err['error']) { %>
+                        <blockquote id="errors-sub"> 
+                            <span class="iconify" data-icon="bx:bx-x-circle" data-inline="false"></span>
+                            <%= err['error'] %>
+                        </blockquote>
+                    <% } else if(err['sucess']) { %>
+                        <blockquote id="sucess-sub"> 
+                            <span class="iconify" data-icon="ant-design:check-circle-twotone" data-inline="false"></span>
+                            <%= err['sucess'] %>
+                        </blockquote>
+                    <% } %>
+                <% } %>
+                <div class="form-elements">
+                <form action="/patchuser" method="POST" id="edit-acc">
+                    <div class="form-selection">
+                        <label for="display_name">Username:</label>
+                        <input type="text" name="display_name" id="display_name" placeholder="Edit your display name" autocomplete="off" value= <%- result[0]['display_name'] %>>
+                        <textarea cols="30" rows="10" maxlength="200" type="text" name="description" id="description" placeholder="Edit your description" autocomplete="off" value= <%- result[0]['description'] %>></textarea>
+                        <select name="privacy" id="privacy">
+                            <option value="public">Public</option>
+                            <option value="privacy">Privacy</option>
+                        </select>
+                        <div class="h-captcha" data-sitekey="b8acaa57-72e8-464a-9b9a-51956bffa08f"></div>
+                        <input type="hidden" name="user_id" autocomplete="off" value=<%- result[0]['user_id'] %>>
+                        <button id="form-submit" disabled type="submit">Save</button>
+                    </div>
+                </form>
+                </div>
+                <div class="analytics">
+                    <div class="reports-made">
+                        <p> <span> <%= reports %> </span> <br> reports made.</p>
+                    </div>
+                    <div class="reports-on-acc">
+                        <p> <span> <%= reports_made %> </span> <br> reports on your account. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="subscriptions-info">
+                <div class="donor-check">
+                    <% if(result[0]['donor']) { %>
+                        <span> You are currently a donor. PayPal automatically draws $25 monthly. Thank you for your donation! </span>
+                        <span id="info-feature"> More information coming soon, like subscription status, and more! </span>
+                    <% } else { %>
+                        <span> You are currently not a donor. If you would like to donate, please press the PayPal button below. It is just $25 a month, and PayPal automatically takes care of automatically charging you monthly. </span>
+                    <% } %>
+                    </div>
+                    <div id="paypal-button-container"></div>
+                        <div class="donor-form">
+                        <% if(successAccess) { %>
+                            <span> As you have donated, you have access to the children form. <strong> Please fill it out as soon as you can, as it expires one week after the initial donation. </strong> </span>
+                            <a href="/success">Success Page</a>
+                        <% } else { %>
+                            <span> You do not have access to the success page, which lets you display children, and gives you a nice badge on your profile page.  </span>
+                        <% } %>
+                        </div>
+                    </div>
+                <div class="reports-info">
+                    <div class="reports-form">
+                        <span id="report-doc"> To report a bug or glitch within the website, using the forum below. </span>
+                        <form action="/" method="POST" id="report-form">
+                            <div class="r-fields">
+                                <textarea name="reason" id="reason" cols="30" rows="10" maxlength=200 placeholder="Edit your description" ></textarea>
+                                <span id="text-counter"></span>
+                                <div class="h-captcha" data-sitekey="b8acaa57-72e8-464a-9b9a-51956bffa08f"></div>
+                                <button id="form-submit" disabled type="submit">Report</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AbvA6hPl6IuH-_lOAdFwaTVjUghJu34ci6xNHHyVZ_gY2pHr2opCeBTPPNIvjZVqUOJnH9_jR1DA3Yas&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <script src="/js/dashboard.js"></script>
+    </body>
+</html>

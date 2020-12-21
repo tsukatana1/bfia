@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<title>Login Page</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <div class="bckgrd-schema">
+        <div class="login-card">
+            <% if(error) { %>
+                <% if(error === 'captchaFailed') { %>
+                    <blockquote id="errors-sub"> 
+                        <span class="iconify" data-icon="bx:bx-x-circle" data-inline="false"></span>
+                        You have failed the captcha. Try again.
+                    </blockquote>
+                <% } else if(error === 'invalidBody') { %>
+                    <blockquote id="errors-sub"> 
+                        <span class="iconify" data-icon="bx:bx-x-circle" data-inline="false"></span>
+                        Please fill out all parts.
+                    </blockquote>
+                <% } %>
+            <% } %>
+            <form action="/loginuser" method="POST">
+                <div class="input-boxes">
+                    <input type="text" name="username" placeholder="Username" id="username-login">
+                    <input type="text" name="password" placeholder="Password" id="pswrd-login">
+                    <div class="h-captcha" data-sitekey="b8acaa57-72e8-464a-9b9a-51956bffa08f"></div>
+                    <button type="submit" id="login-button">Login</button>
+                </div>
+            </form>
+            <p>Note: We use cookies to keep you logged in! No need to ever login again!</p>
+            <a href="/register">Dont have an account? Click here.</a>
+            <button id="pswrd-recover">Forgot Password? Click here.</button>
+            <p id="error-pha"></p>
+        </div>
+    </div>
+</body>

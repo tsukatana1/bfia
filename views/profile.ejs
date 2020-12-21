@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<title>Profile</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head>
+<body>
+    <link href="/css/profile.css" rel="stylesheet" type="text/css">
+    <nav>
+        <div class="logo">
+            <p>Bakersfield Family Island</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profiles</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><button id="modal-btn">Help</button></li>
+        </ul>
+    </nav>
+    <div id="prof-help-modal">
+        <p>Our profiles are made to be simple and concise. Here is the key of contents to our profiles</p>
+        <ul>
+            <li><strong>Hammer Badge</strong> The hammer badge is a badge that only <strong>admins</strong> of our website have.</li>
+            <li><strong>Heart Badge</strong> The heart badge is a badge that only <strong>donors</strong> acquire.</li>
+        </ul>
+        <button id="close-modal">Close</button>
+    </div>
+    <% if(prof.length === 0) { %>
+        <div class="no-account">
+            <div class="no-info">
+                <div class="cross-spans">
+                    <span class="line line-left"></span>
+                    <span class="line line-right"></span>
+                </div>
+                <br>
+                <h2>Oops, an error occured 👀.</h2>
+                <p>No account with that ID or name was found. Either it does not exist, or it is marked as private.</p>
+                <br>
+                <h4>Try searching another ID or username.</h4>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="account-box">
+            <div class="acc-info">
+                <img class="avatar" src="/css/images/avatar.png">
+                <h2><%= prof[0]['display_name'] %></h2>
+                <h5><%= prof[0]['email'] %></h5>
+                <h4 id="user-idp" data-user-id=<%- prof[0]['user_id'] %>> UID: <%= prof[0]['user_id'] %> </h4>
+                <br>
+                <p>Description:</p>
+                <p><%= prof[0]['description'] %></p>
+                <br>
+                <% if(children === undefined) { %>
+                    <p>This person has no children.</p>
+                    <br>
+                <% } else { %>
+                    <p>Children:</p>
+                    <br>
+                    <% children['children_info'].forEach(i => { %>
+                        <div class="each-child">
+                            <h3> Name: <%= i.name %> </h3>
+                            <p> Age: <%= i.age %> </p>
+                            <p> Gender: <%= i.gender %> </p>
+                        </div>
+                        <br>
+                    <% }) %>
+                <% } %>
+            </div>
+            <br>
+            <p class="badge-label">Badges:</p>
+            <div class="ack-box">
+                <% if(prof[0]['permiss'] === 'admin') { %>
+                    <img class="badges admin-badge" src="https://cdn.discordapp.com/emojis/760857969096917022.png?v=1">
+                <% } %>
+                <% if(prof[0]['donor'] === true) { %>
+                    <img class="badges donor-badge" src="/css/images/donor_badge.webp">
+                <% } %>
+            </div>
+            <% if(isReported === undefined) { %>
+                <button id="report-button">Report</button>
+                <div class="report-show">
+                    <form action="/report" method="POST">
+                        <div class="report-contents">
+                            <select name="report-selection" id="report-dropdown">
+                                <option value="INAPPROPRIATE">Inappropriate Content</option>
+                                <option value="EXPLOTING">Exploting Resources</option>
+                                <option value="ADVERTISING">Advertisement</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                            <textarea id="report-input" cols="7" rows="7" minlength="10" maxlength="200"></textarea>
+                            <h5 id="textarea-counter"></h5>
+                            <button type="submit" id="report-post">Report</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="report-sucess"></div>
+            <% } else { %>
+                <p>You already reported this person for <%= isReported['descr'] %> with scope: <%= isReported['reason'] %>. We thank you for your support.</p>
+            <% } %>
+    <% } %>
+    <script type='text/javascript'>
+        const modal_btn = document.getElementById('modal-btn')
+        const modal = document.getElementById('prof-help-modal')
+        const profile = document.getElementsByClassName('account-box')[0]
+        const close_modal = document.getElementById('close-modal')
+        const reportButton = document.getElementById('report-button')
+        const reportDiv = document.getElementsByClassName('report-show')[0]
+        const reportInput = document.getElementById("report-input")
+        const reportCounter = document.getElementById('textarea-counter')
+        const reportPostButton = document.getElementById('report-post')
+
+        modal_btn.addEventListener('click', () => {
+            modal.classList.toggle('active')
+        })
+
+        close_modal.addEventListener('click', () => {
+            modal.classList.toggle('active')
+        })
+
+        reportButton.addEventListener('click', () => {
+            reportDiv.classList.toggle('shown')
+        })
+
+        reportInput.addEventListener('input', (e) => {
+            const target = event.currentTarget
+            const maxLength = target.getAttribute('maxlength')
+            const currentLen = target.value.length
+            
+            if(currentLen >= maxLength) {
+                return reportCounter.innerText = "You have reached the maximum amount of characters."
+            } 
+
+            reportCounter.innerText = `${currentLen}/${maxLength}`
+        })
+    </script>
+</body>

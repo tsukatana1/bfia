@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    </head>
+    <title>BFIA Register Page</title>
+    <body>
+        <link href="/css/register.css" rel="stylesheet" type="text/css">
+        <div class="register-page-containers">
+            <div class="left-loginsrc">
+                <div class="login-content">
+                    <div class="login-quote">
+                        <h2>Already have an account?</h2>
+                        <img src="/css/images/email.png" alt="email_icon">
+                        <br>
+                        <br>
+                        <p>Already have an account? Please login instead.</p>
+                    </div>
+                    <div class="login-button">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="right-registersrc">
+                <button id="back-button"><span class="iconify" data-icon="carbon:chevron-left" data-inline="false"></span></button>
+                <form id="register-form" action="/newuser" method="POST">
+                    <br>
+                    <div id="register-prog"><span id="prog"></span></div>
+                    <br>
+                    <div class="register-boxes">
+                        <div class="register-primeinfo form-slider-container">
+                            <p>Register Now</p>
+                            <input type="text" name="name" id="name" placeholder="First Name" required oninvalid="noAlert(event)">
+                            <input type="email" name="email" id="email" placeholder="Email" required oninvalid="noAlert(event)">
+                            <input type="text" name="username" id="username" placeholder="Username" required oninvalid="noAlert(event)">
+                            <input type="password" name="password" id="password-in" placeholder="Password" required oninvalid="noAlert(event)">
+                            <select name="gender" id="gender-fa" required>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
+                                <option value="OTHER">Other [Non-Binary]</option>
+                            </select>
+                        </div>
+                        <div class="description-div form-slider-container">
+                            <p>Give us a little description about you.</p>
+                            <span id="example-span">Ex: I am a senior developer and work for Apple.</span>
+                            <textarea name="description" id="des-textarea" cols="30" rows="10" maxlength="200" placeholder="Post a description" required oninvalid="noAlert(event)"></textarea>
+                            <span id="description-word-counter"></span>
+                        </div>
+                        <div class="preferances form-slider-container">
+                            <span id="example-span">The display name will be the name your profile is displayed as.</span>
+                            <br>
+                            <span class="divider"></span>
+                            <input id="display-name" name="display_name" placeholder="Display Name" required oninvalid="noAlert(event)">
+                            <span id="error-pha"></span>
+                        </div>
+                        <div class="priv-settings form-slider-container">
+                            <span id="example-span">These settings tell us what your desired privacy settings are.</span>
+                            <span id="example-span">Picking private will make your profile private. Public will make it public.</span>
+                            <select name="privacy" id="privacy-fa">
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                            <br>
+                            <div class="h-captcha" data-sitekey="b8acaa57-72e8-464a-9b9a-51956bffa08f"></div>
+                            <br>
+                            <button id="submit-form" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+                <button id="for-button"><span class="iconify" data-icon="carbon:chevron-right" data-inline="false"></span></button>
+            </div>
+        </div>
+        <script type="text/javascript" src="/js/register.js"></script>
+    </body>
+</html>

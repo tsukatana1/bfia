@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<title>Profile Search</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+</head>
+<body>
+    <link href="/css/profile_search.css" rel="stylesheet" type="text/css">
+    <nav>
+        <div class="logo">
+            <p>Bakersfield Family Island</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profiles</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+        </ul>
+    </nav>
+    <div class="profile-search-box">
+        <input type="search" name="profile-search" placeholder="Search for a user (id or username)" id="profile-search">
+        <button id="submit-search"><span class="iconify" data-icon="octicon-search" data-inline="false"></span></button>
+    </div>
+    <br>
+    <div class="search-template">
+        <!--<div class="search-donorad">
+            <p>Want to become a donor? You'll recieve a nice badge and our appreciation, as well as the appreication of children around the world!</p>
+            <button id="redirect-button">Donate Now</button>
+        </div>-->
+        <div class="reviews">
+            <h2 class="review-rsp">Some Reviews:</h2>
+            <% reviews.forEach(item => { %>
+                <div class="review-box">
+                    <h3><%= item['name'] %> </h3>
+                    <p> <%= item['description'] %> </p>
+                    <div class="stars">
+                        <% for(i = 0; i<item['stars']; i++) { %>
+                            <span id="star-icon" class="iconify" data-icon="ic:round-stars" data-inline="false"></span>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="profiles-result">
+            <h2 class="search-rsp">Search Results:</h2>
+            <h2 class="search-rsp"></h2>
+            <% profiles.forEach(i => { %>
+                <div class="each-person">
+                    <div class="time-name">
+                        <a href="http://localhost:3000/profile/<%- i['user_id'] %>"> <%= i['display_name'] %> </a>
+                        <p> Created At <%= new Date(parseInt(i['account_creation'])).toLocaleString() %> UTC</p>
+                    </div>
+                    <p><%= i['description'] %> </p>
+                    <p>Click to see more.</p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/profiles.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>

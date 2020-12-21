@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<title>Sucessful Payment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<body>
+    <link href="/css/sucess.css" rel="stylesheet" type="text/css">
+    <div class="enter-info">
+        <div class="donating-form">
+            <h2>Informational Form</h2>
+            <div class="child-divs">
+                <p>To add another child please click the <span class="btn-markup">Add Child</span> button on the bottom of the form.</p>
+                <br>
+                <div class="each-child">
+                    <div class="age-and-info">
+                        <input type="text" name="name" id="name-input" class="name-input" placeholder="Full Name">
+                        <input type="number" name="age" id="age-input" class="age-input" placeholder="Age" min='0' max='120'>
+                    </div>
+                    <p class="gen-sep">Gender:</p>
+                    <div class="gender-select">
+                        <label>Male
+                            <input type="radio" name="gender1" value="Male">
+                        </label>
+                        <label>Female
+                            <input type="radio" name="gender1" value="Female">
+                        </label>
+                        <label>Non-Binary
+                            <input type="radio" name="gender1" value="Other">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button id="add-child-btn">Add A Child</button>
+            <button id="submit-button">Submit</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+    const add_child = document.getElementById('add-child-btn')
+    const submit_button = document.getElementById('submit-button')
+    const people = document.getElementsByClassName('each-child')
+    const age = document.getElementById('age-input')
+
+    age.addEventListener('change', (e) => {
+        if(e.target.value < 0) {
+            e.target.value = 0
+        } else if(e.target.value > 200) {
+            e.target.value = 120
+        }
+    })
+
+    submit_button.addEventListener('click', () => {
+        const name = document.getElementsByClassName('name-input')
+        const age = document.getElementsByClassName('age-input')
+        //const test = document.getElementById('ohga')
+
+        const values = []
+
+        for(i = 0; i < people.length; i++) {
+            const gender = document.querySelector(`input[name='gender${i + 1}']:checked`)
+
+            values.push({
+                name: name[i].value,
+                age: age[i].value,
+                gender: gender.value
+            })
+        }
+
+        const body = {
+            values: values
+        }
+
+        fetch('/donor', {
+            credentials: 'same-origin',
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        .then(result => result.json())
+        .then(json => console.log(json))
+    })
+
+    add_child.addEventListener('click', addPayload)
+
+    function addPayload() {
+        const childClass = document.getElementsByClassName('child-divs')[0]
+        const childHTML = `<br>
+                            <div class="each-child">
+                                <div class="age-and-info">
+                                    <input type="text" name="name" id="name-input" class="name-input" placeholder="Full Name">
+                                        <input type="number" name="age" id="age-input" class="age-input" placeholder="Age" min='0' max='120'>
+                                </div>
+                                <p class="gen-sep">Gender:</p>
+                                <div class="gender-select">
+                                        <label>Male
+                                            <input type="radio" name="gender${people.length + 1}" value="Male">
+                                        </label>
+                                        <label>Female
+                                            <input type="radio" name="gender${people.length + 1}" value="Female">
+                                        </label>
+                                        <label>Other
+                                            <input type="radio" name="gender${people.length + 1}" value="Other">
+                                        </label>
+                                    </div>
+                                </div>`
+
+        const myDiv = document.createElement('div')
+        myDiv.innerHTML = childHTML
+        childClass.appendChild(myDiv)
+    }
+    </script>
+</body>

@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --dark-mode: rgb(59, 58, 58);
+    --white-mode: white;
+    --text-dark-mode: rgba(240, 235, 235, 0.918);
+    --text-white-mode: rgba(54, 53, 53, 0.952);
+}
+
+body {
+    background-color: var(--white-mode);
+    transition: 1s ease;
+}
+
+body.dark {
+    background-color: var(--dark-mode);
+    transition: 1s ease;
+}
+
+.list-of {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 1s ease;
+    width: 85%;
+    float: right;
+}
+
+.side-nav {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 15%;
+    background-color: grey;
+    top: 0%;
+    bottom: 0%;
+}
+
+.dark-mode {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+#dark-mode-btn {
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    background-color: white;
+    color: var(--text-white-mode);
+}
+
+body.dark > .side-nav > .dark-mode > #dark-mode-btn {
+    background-color: black;
+    color: var(--text-dark-mode);
+}
+
+body.dark > .list-of > .dash  {
+    color: var(--text-dark-mode);
+}
+
+body.dark > .list-of > .accounts-page > .info-table > .weekly-ana > table tr:nth-child(even) td {
+    color: var(--text-white-mode);
+}
+
+body.dark > .list-of > .accounts-page > .info-table > .weekly-ana > table tr:nth-child(odd) td {
+    color: var(--text-dark-mode);
+}
+
+body.dark > .list-of > .accounts-page > .info-table > .weekly-ana {
+    color: var(--text-dark-mode);
+}
+
+body.dark > .list-of > .accounts-page > .info-table > .route-ana {
+    color: var(--text-dark-mode);
+}
+
+
+
+body.dark > .list-of > .accounts-page > .info-table > .route-ana > table tr:nth-child(even) td {
+    color: var(--text-white-mode);
+}
+
+body.dark > .list-of > .accounts-page > .info-table > .route-ana > table tr:nth-child(odd) td {
+    color: var(--text-dark-mode);
+}
+
+.buttons-div {
+    justify-content: space-around;
+    display: flex;
+    width: 50%;
+    margin-top: 1em;
+}
+
+.buttons-div ul li {
+    list-style: none;
+}
+
+.buttons-div ul li button {
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    background-color: grey;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+#coming-soon {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color:rgb(59, 58, 58)
+}
+
+.accounts-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 1em;
+    font-family: 'Poppins', sans-serif;
+    width: 80%;
+}
+
+.info-table {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    font-family: 'Poppins', arial;
+    justify-content: space-around;
+    width: 70%;
+}
+
+.accounts-page h1 {
+    background-color: teal;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    width: 400px;
+}
+
+.dash.dark > h3 {
+    color: var(--text-dark-mode);
+}
+
+table {
+    font-family: 'Poppins', sans-serif;
+    border-collapse: collapse;
+    width: 400px;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.reports-div {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.privacy-stat {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.priv-bar, .pub-bar {
+    width: 50%;
+}
+
+.priv-bar {
+    background-color: rgba(231, 22, 22, 0.5);
+    border-radius: 15px 0px 0px 15px;
+    color: white;
+}
+
+.pub-bar {
+    background-color:rgba(35, 231, 189, 0.5);
+    border-radius: 0px 15px 15px 0px;
+    color: black;
+}
+
+.priv-bar span, .pub-bar span {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 760px) {
+    .side-nav {
+        left: -30%;
+    }
+
+    .info-table table {
+        width: 150px;
+    }
+}
