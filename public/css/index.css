@@ -464,4 +464,9 @@ nav {
         justify-content: center;
         align-items: center;
     }
+
+    .ad a {
+        width: 50%;
+        height: 50px;
+    }
 }

@@ -1,11 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const expressIp = require('express-ip')
 const { userPermitted, authDonor, getUserRe, pool, authUrl, genId, getAll, getUser, getUserChildren, getUsers, getReviews, verifyUser, getPrivSettings } = require('./tools.js')
 const ejs = require('ejs')
 const bcrypt = require('bcryptjs')
-const csrf = require('csurf')
-const reqwest = require('node-fetch')
 const mailer = require('nodemailer')
 const cookieParser = require('cookie-parser');
 const server = express()
@@ -67,7 +64,7 @@ const mailConfig = mailer.createTransport({
 })
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'http://testdev.com:3000',
     optionsSucessStatus: 200
 }
 
@@ -138,7 +135,7 @@ server.get('/payment-failure', (req, res) => {
     res.render('failure')
 })
 
-server.get('/success', verifySucessAccess, (req, res) => {
+server.get('/success', (req, res) => {
     res.render('success')
 })
 

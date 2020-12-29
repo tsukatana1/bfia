@@ -92,6 +92,18 @@ input {
     margin-right: 10px;
 }
 
+#add-child-btn, #submit-button {
+    border-radius: 10px;
+    background-color: rgb(59, 46, 241);
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
 
 @keyframes floating {
     0% { transform: translateY(0); }
