@@ -2,8 +2,8 @@ const { Pool } = require('pg')
 const bcrypt = require('bcryptjs')
 
 const pool = new Pool({
-    password: 'encrypted01',
-    database: 'BakFamily',
+    password: 'encrypted01;',
+    database: 'bakfamily',
     port: 5432,
     host: '127.0.0.1',
     user: 'postgres',
@@ -38,12 +38,15 @@ async function authAdmin(req, res, next) {
         return res.status(403).redirect('/login')
     }
 
-    const result = await pool.query("SELECT perms FROM accounts WHERE username = $1", req.cookies['username'])
+    const result = await pool.query("SELECT perms FROM accounts WHERE username = $1 AND user_id = $2", clean_xss(req.cookies['username']), req.cookies['user_id'])
 
     if(result.rows.length === 0) {
         return res.status(403).redirect('/login')
     } else {
-        next()
+        if(result.rows.perms === 'ADMIN') {
+            next()
+        }
+        return res.status(403).redirect('/login')
     }
 }
 
@@ -204,6 +207,7 @@ module.exports = {
     USER,
     pool,
     authUrl,
+    authAdmin,
     genId,
     getAll,
     getUser,

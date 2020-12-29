@@ -14,11 +14,11 @@ const fetch = require('node-fetch')
 var userCount = [{ week: 'Week 1', number: 10 }, { week: 'Week 2', number: 10 }]
 //Module configs
 
-/* fetch('https://api-m.sandbox.paypal.com/v1/billing/plans', {
+/* fetch('https://api.paypal.com/v1/billing/plans', {
     method: "POST",
-    headers: { "Accept": 'application/json', "Authorization": "Bearer A21AAIUBxFNvN-HjuHmDjZcPMysLGsht9U0l3dHJPtrlzOw6c_l5StkvjLmt06yh-H8RrzN6IU5HNNi0KRzDO7ruDxzlcBtrg", "Prefer": "return=representation", "Content-Type": 'application/json' },
+    headers: { "Accept": 'application/json', "Authorization": "Bearer A21AANUe9vnguuVAt32JJ54V25pCjO4oMPG6SUDx4Dlj6LcvHGX6UrIU_OTuedcUhml5wzx2XJWp1_S3HX3-aUoTVcQvpfVrg", "Prefer": "return=representation", "Content-Type": 'application/json' },
     body: JSON.stringify({
-        product_id: "PROD-3WW63467NH942681H",
+        product_id: "PROD-5US03340PX136852L",
         name: "BFIA Donation Plan",
         description: "The monthly plan to donate for the Bakersfield Island Family.",
         billing_cycles: [
@@ -64,7 +64,7 @@ const mailConfig = mailer.createTransport({
 })
 
 const corsOptions = {
-    origin: 'http://testdev.com:3000',
+    origin: 'http://bakfamilyisland.com',
     optionsSucessStatus: 200
 }
 
@@ -135,7 +135,7 @@ server.get('/payment-failure', (req, res) => {
     res.render('failure')
 })
 
-server.get('/success', (req, res) => {
+server.get('/success', verifySucessAccess, (req, res) => {
     res.render('success')
 })
 
@@ -351,7 +351,7 @@ server.post('/patchuser', cors(corsOptions), async(req, res) => {
     })
 }) */
 
-server.listen(3000, () => {
+server.listen(80, () => {
     console.log(`Ready at localhost:3000`)
 })
 
