@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { userPermitted, authDonor, getUserRe, pool, authUrl, genId, getAll, getUser, getUserChildren, getUsers, getReviews, verifyUser, getPrivSettings } = require('./tools.js')
+const { authAdmin,  userPermitted, authDonor, getUserRe, pool, authUrl, genId, getAll, getUser, getUserChildren, getUsers, getReviews, verifyUser, getPrivSettings } = require('./tools.js')
 const ejs = require('ejs')
 const bcrypt = require('bcryptjs')
 const mailer = require('nodemailer')
@@ -147,7 +147,7 @@ server.get('/login', (req, res) => {
     res.render('login', { error: req.query.error })
 })
 
-server.get('/admin', async(req, res) => {
+server.get('/admin', authAdmin, async(req, res) => {
     const userLength = await pool.query("SELECT * FROM accounts")
     const results = await getPrivSettings()
     const routeInfo = await routeStats()
