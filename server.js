@@ -10,8 +10,7 @@ const Redis = require('ioredis')
 const { RateLimiterRedis } = require('rate-limiter-flexible')
 const cors = require('cors')
 const fetch = require('node-fetch')
-//const paypal = require('@paypal/checkout-server-sdk')
-var userCount = [{ week: 'Week 1', number: 10 }, { week: 'Week 2', number: 10 }]
+var userCount = []
 //Module configs
 
 /* fetch('https://api.paypal.com/v1/billing/plans', {
@@ -64,7 +63,7 @@ const mailConfig = mailer.createTransport({
 })
 
 const corsOptions = {
-    origin: 'http://bakfamilyisland.com',
+    origin: 'http://testdev.com:3000',
     optionsSucessStatus: 200
 }
 
@@ -351,7 +350,7 @@ server.post('/patchuser', cors(corsOptions), async(req, res) => {
     })
 }) */
 
-server.listen(80, () => {
+server.listen(3000, () => {
     console.log(`Ready at localhost:3000`)
 })
 
@@ -395,8 +394,12 @@ async function verifySucessAccess(req, res, next) {
 }
 
 //Intervals for stats
-/* setInterval(async(e) => { 
+setInterval(async() => { 
     const st = await pool.query("SELECT * FROM accounts")
     const index = userCount.length 
     userCount.push({ week: `Week ${index}`, number: st.rows.length })
-}, 10000) */
+}, 6.048e+8)
+
+setInterval(() => {
+    userCount.length = 0
+}, 2.628e+9)
