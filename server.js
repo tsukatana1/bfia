@@ -15,9 +15,9 @@ var userCount = []
 
 /* fetch('https://api.paypal.com/v1/billing/plans', {
     method: "POST",
-    headers: { "Accept": 'application/json', "Authorization": "Bearer A21AANUe9vnguuVAt32JJ54V25pCjO4oMPG6SUDx4Dlj6LcvHGX6UrIU_OTuedcUhml5wzx2XJWp1_S3HX3-aUoTVcQvpfVrg", "Prefer": "return=representation", "Content-Type": 'application/json' },
+    headers: { "Accept": 'application/json', "Authorization": "Bearer <>", "Prefer": "return=representation", "Content-Type": 'application/json' },
     body: JSON.stringify({
-        product_id: "PROD-5US03340PX136852L",
+        product_id: "id",
         name: "BFIA Donation Plan",
         description: "The monthly plan to donate for the Bakersfield Island Family.",
         billing_cycles: [
