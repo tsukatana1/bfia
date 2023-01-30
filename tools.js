@@ -2,8 +2,8 @@ const { Pool } = require('pg')
 const bcrypt = require('bcryptjs')
 
 const pool = new Pool({
-    password: 'archencrypted',
-    database: 'bakfamily',
+    password: 'mypassword',
+    database: 'mydb',
     port: 5432,
     host: '127.0.0.1',
     user: 'postgres',
