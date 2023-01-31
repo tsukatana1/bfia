@@ -57,8 +57,8 @@ const redisClient = new Redis({
 const mailConfig = mailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'bakersfieldisland123@gmail.com',
-        pass: 'bakersfield123'
+        user: 'something@gmail.com',
+        pass: 'passwrd'
     }
 })
 
@@ -167,7 +167,7 @@ server.post('/newuser', cors(corsOptions), async(req, res) => {
 
     const cap = req.body['h-captcha-response']
 
-    fetch(`https://hcaptcha.com/siteverify?secret=0xd49Af239Ef597ecD3Aa60D05014Bdd21E36fDebe&response=${cap}`, {
+    fetch(`https://hcaptcha.com/siteverify?secret=${ENV.secret}&response=${cap}`, {
         method: "POST",
         headers: { "Content-Type": "application/xxx-form-urlencoded" },
     }).then(res => res.json())
@@ -198,10 +198,10 @@ server.post('/newuser', cors(corsOptions), async(req, res) => {
         res.cookie('user_id', `${user_id}`, { path: '/', maxAge: new Date(253402300000000) })
 
         const mailOptions = {
-            from: 'bakersfieldisland123@gmail.com',
+            from: 'someemail@gmail.com',
             to: `${personObject.email}`,
             subject: 'Welcome',
-            html: `<h2>Welcome ${personObject.username} to the Bakersfield Family Island Foundation!</h2>
+            html: `<h2>Welcome ${personObject.username} to the ______ Family Island Foundation!</h2>
                     <br>
                     <p>You are now part of the family! Thanks for creating your account with us.</p>
                     <p>For further questions, please contact us, via email or telephone, which you can find <a>http://testdev.com:3000/</a> here.</p>`
@@ -250,7 +250,7 @@ server.post('/loginuser', cors(corsOptions), async(req, res) => {
         return res.redirect('/login?error=invalidBody')
     }
     
-    fetch(`https://hcaptcha.com/siteverify?secret=0xd49Af239Ef597ecD3Aa60D05014Bdd21E36fDebe&response=${hcaptcha}`, {
+    fetch(`https://hcaptcha.com/siteverify?secret=${ENV.secret}&response=${hcaptcha}`, {
         method: "POST",
         headers: { "Content-Type": "application/xxx-form-urlencoded" },
     })
@@ -312,7 +312,7 @@ server.post('/patchuser', cors(corsOptions), async(req, res) => {
     const cap = req.body['h-captcha-response']
     if(!cap) return res.redirect(`/dashboard/${req.body.user_id}?err=true`)
 
-    fetch(`https://hcaptcha.com/siteverify?secret=0xd49Af239Ef597ecD3Aa60D05014Bdd21E36fDebe&response=${cap}`, {
+    fetch(`https://hcaptcha.com/siteverify?secret=${ENV.secret}&response=${cap}`, {
         method: "POST",
         headers: { "Content-Type": "application/xxx-form-urlencoded" },
     }).then(res => res.json())
@@ -335,10 +335,10 @@ server.post('/patchuser', cors(corsOptions), async(req, res) => {
 
 /* server.post('/recover', authUrl, cors(corsOptions), csrfProtection, async(req, res) => {
     const mailOptions = {
-        from: 'bakersfieldisland123@gmail.com',
+        from: 'somethingemail@gmail.com',
         to: 'daviddlon4949@gmail.com',
         subject: 'Welcome',
-        text: 'Welcome to the bakersfield Island'
+        text: 'Welcome to the ))) Island'
     }
 
     mailConfig.sendMail(mailOptions, (error, info) => {
